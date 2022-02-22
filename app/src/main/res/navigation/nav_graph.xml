@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homePage">
+
+    <fragment
+        android:id="@+id/homePage"
+        android:name="com.example.daval.moneytoday.HomePage"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePage_to_gastPersonalesView"
+            app:destination="@id/gastPersonalesView" />
+        <action
+            android:id="@+id/action_homePage_to_fragment_creditos"
+            app:destination="@id/fragment_creditos" />
+    </fragment>
+    <fragment
+        android:id="@+id/gastPersonalesView"
+        android:name="com.example.daval.moneytoday.gastosPersonales.gastPersonalesView"
+        android:label="fragment_gast_personales_view"
+        tools:layout="@layout/fragment_gast_personales_view" >
+        <action
+            android:id="@+id/action_gastPersonalesView_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_creditos"
+        android:name="com.example.daval.moneytoday.creditos.fragment_creditos"
+        android:label="fragment_creditos"
+        tools:layout="@layout/fragment_creditos" >
+        <action
+            android:id="@+id/action_fragment_creditos_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
+</navigation>
