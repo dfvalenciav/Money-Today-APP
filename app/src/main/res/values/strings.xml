@@ -7,7 +7,7 @@
     <string name="simCredito">SIMULADOR CREDITO</string>
     <string name="prestamoValor">¿Cuánto vas a prestar?</string>
     <string name="simInteres">¿Cual es la tasa de interés?</string>
-    <string name="simPlazo">¿A cuántos meses lo necesitas?</string>
+    <string name="simPlazo">¿A cuántos meses lo vas a prestar?</string>
     <string name="btnSimulador">Calcular</string>
     <string name="cuota">Cuota</string>
     <string name="abono_a_capital">Abono a capital</string>
