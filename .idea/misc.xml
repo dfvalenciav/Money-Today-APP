@@ -8,7 +8,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/fragment_creditos.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.396875" />
+        <entry key="app/src/main/res/layout/fragment_simulador_u_i.xml" value="0.21354166666666666" />
       </map>
     </option>
   </component>

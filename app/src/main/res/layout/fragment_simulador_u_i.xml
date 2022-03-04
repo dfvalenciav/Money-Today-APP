@@ -14,6 +14,7 @@
         style="@style/editTextInfoCredito"
         android:autofillHints="@string/prestamoValor"
         android:hint="@string/prestamoValor"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/simInteres"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

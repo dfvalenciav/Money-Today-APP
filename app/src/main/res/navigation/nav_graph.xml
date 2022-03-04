@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homePage_to_fragment_creditos"
             app:destination="@id/fragment_creditos" />
+        <action
+            android:id="@+id/action_homePage_to_simuladorFragmentUI"
+            app:destination="@id/simuladorFragmentUI" />
     </fragment>
     <fragment
         android:id="@+id/gastPersonalesView"
@@ -33,6 +36,14 @@
         tools:layout="@layout/fragment_creditos" >
         <action
             android:id="@+id/action_fragment_creditos_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/simuladorFragmentUI"
+        android:name="com.example.daval.moneytoday.Simulador.SimuladorFragmentUI"
+        android:label="SimuladorFragmentUI" >
+        <action
+            android:id="@+id/action_simuladorFragmentUI_to_homePage"
             app:destination="@id/homePage" />
     </fragment>
 </navigation>

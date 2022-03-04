@@ -1,12 +1,12 @@
 package com.example.daval.moneytoday.Simulador
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.example.daval.moneytoday.Adapter.CustomAdapter
 import com.example.daval.moneytoday.R
 import com.example.daval.moneytoday.dataMoneyToday.objSimuladorCredito
@@ -27,24 +27,39 @@ class SimuladorFragmentUI : Fragment() {
     private var matrizCredito: ArrayList<objSimuladorCredito> = ArrayList()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_simulador_u_i, null, false)
-        credito = binding.simCredito.text.toString().toDouble()
-        interes = binding.simInteres.text.toString().toDouble()
-        plazo = binding.simPlazo.text.toString().toInt()
-        val mCredito = simuladorCredito (credito,interes, plazo)
-        adapter = context?.let { CustomAdapter(it, mCredito) }!!
-        binding.recyclerView.adapter = adapter
+
+        binding.btnSimulador.setOnClickListener {
+            var Strcredito = binding.simCredito.text.toString()
+            var Strinteres = binding.simInteres.text.toString()
+            var Strplazo = binding.simPlazo.text.toString()
+            Log.e("navigation", Strcredito)
+            if (Strcredito.isNotEmpty()  || Strinteres.isNotEmpty() || Strplazo.isNotEmpty()) {
+                credito = Strcredito.toDouble()
+                interes = Strinteres.toDouble()
+                plazo = Strplazo.toInt()
+                Log.e("navigation", (credito/credito).toString())
+
+            }
+            val mCredito = simuladorCredito (credito,interes, plazo)
+            adapter = context?.let { CustomAdapter(it, mCredito) }!!
+            binding.recyclerView.adapter = adapter
+        }
         return binding.root
+
+
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
 
     }

@@ -21,7 +21,7 @@ class HomePage : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentHomePageBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home_page, null, false)
         binding.simuladorButton.setOnClickListener { view:View ->
-            Navigation.findNavController(view).navigate(R.id.action_homePage_to_fragment_creditos)
+            Navigation.findNavController(view).navigate(R.id.action_homePage_to_simuladorFragmentUI)
         }
 
         return binding.root
