@@ -49,8 +49,8 @@ class SimuladorFragmentUI : Fragment() {
 
             }
             val mCredito = simuladorCredito (credito,interes, plazo)
-            adapter = context?.let { CustomAdapter(it, mCredito) }!!
-            binding.recyclerView.adapter = adapter
+           // adapter = context?.let { CustomAdapter(it, mCredito) }!!
+            //binding.recyclerView.adapter = adapter
         }
         return binding.root
 

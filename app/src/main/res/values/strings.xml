@@ -14,4 +14,9 @@
     <string name="intereses">Intereses</string>
     <string name="saldo">Saldo</string>
     <string name="valor_de_la_cuota">V. de la cuota</string>
+    <string name="resumen_de_su_credito">RESUMEN DE SU CREDITO</string>
+    <string name="tasa_de_inter_s">Tasa de Interés:</string>
+    <string name="plazo">Plazo:</string>
+    <string name="intereses_totales">Intereses totales:</string>
+    <string name="dinero_a_prestar">Dinero a prestar:</string>
 </resources>
