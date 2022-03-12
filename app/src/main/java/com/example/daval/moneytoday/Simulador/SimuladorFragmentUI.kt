@@ -52,13 +52,23 @@ class SimuladorFragmentUI : Fragment() {
                 plazo = Strplazo.toInt()
 
             }
-            simuladorCredito(credito, interes, plazo)
+            var resultadosSimulacion = simuladorCredito(credito, interes, plazo)
+            var interesesSuma = 0.0
+            binding.simCreditResCuota.text = resultadosSimulacion[1].valCouta.toString()
+            binding.simCreditResMonto.text = credito.toString()
+            binding.simCreditResPlazo.text = plazo.toString()
+            binding.simCreditResTasaInt.text = interes.toString()
+            for (i in 1 .. plazo + 1) {
+                Log.e("credito", resultadosSimulacion[i].instereses.toString())
+                interesesSuma += 0 + resultadosSimulacion[i].instereses
+
+            }
+            binding.simCreditResIntTotal.text = interesesSuma.toString()
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireView().applicationWindowToken, 0)
         }
+
         return binding.root
-
-
 
     }
 
@@ -75,18 +85,18 @@ class SimuladorFragmentUI : Fragment() {
         val interesConversion = interes/100.00
         val objCuotaNumero = objSimuladorCredito(0,0.0,0.0,credito,0.0)
         matrizCredito.add(0,objCuotaNumero)
+
         cuota = Math.round(credito*(((interesConversion*(Math.pow((1.0+interesConversion),plazo.toDouble()))))/
                 (Math.pow((1.0+interesConversion),plazo.toDouble())-1.0))*100.0).toDouble()/100.0
         for (i in 1 .. plazo+1) {
             coutaNumero++
-            intereses  = Math.round(((matrizCredito.get(i-1).saldo)*interesConversion)*100.0).toDouble()/100.0
+            intereses  =  Math.round(((matrizCredito.get(i-1).saldo)*interesConversion)*100.0).toDouble()/100.0
             abonoCapital = Math.round((cuota-intereses)*100.0).toDouble()/100.0
             saldo = matrizCredito.get(i-1).saldo - abonoCapital
             matrizCredito.add(i,objSimuladorCredito(coutaNumero, abonoCapital, intereses, saldo, cuota))
             Log.e("credito",matrizCredito[i].toString())
         }
-
-        return matrizCredito
+        return this.matrizCredito
     }
 
 
