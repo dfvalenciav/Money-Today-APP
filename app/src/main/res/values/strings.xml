@@ -5,6 +5,7 @@
     <string name="btn_gastPersonales">GASTOS PERSONALES</string>
     <string name="btn_simCredito">simulador credito</string>
     <string name="simCredito">SIMULADOR CREDITO</string>
+    <string name="emptyString"> </string>
     <string name="prestamoValor">¿Cuánto vas a prestar?</string>
     <string name="simInteres">¿Cual es la tasa de interés?</string>
     <string name="simPlazo">¿A cuántos meses lo vas a prestar?</string>

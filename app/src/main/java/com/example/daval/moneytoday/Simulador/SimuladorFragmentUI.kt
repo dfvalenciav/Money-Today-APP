@@ -1,12 +1,14 @@
 package com.example.daval.moneytoday.Simulador
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.daval.moneytoday.Adapter.CustomAdapter
 import com.example.daval.moneytoday.R
 import com.example.daval.moneytoday.dataMoneyToday.objSimuladorCredito
@@ -27,7 +29,10 @@ class SimuladorFragmentUI : Fragment() {
     private var matrizCredito: ArrayList<objSimuladorCredito> = ArrayList()
 
 
-
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,21 +41,20 @@ class SimuladorFragmentUI : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_simulador_u_i, null, false)
 
+
         binding.btnSimulador.setOnClickListener {
             var Strcredito = binding.simCredito.text.toString()
             var Strinteres = binding.simInteres.text.toString()
             var Strplazo = binding.simPlazo.text.toString()
-            Log.e("navigation", Strcredito)
-            if (Strcredito.isNotEmpty()  || Strinteres.isNotEmpty() || Strplazo.isNotEmpty()) {
+            if (Strcredito.isNotEmpty() || Strinteres.isNotEmpty() || Strplazo.isNotEmpty()) {
                 credito = Strcredito.toDouble()
                 interes = Strinteres.toDouble()
                 plazo = Strplazo.toInt()
-                Log.e("navigation", (credito/credito).toString())
 
             }
-            val mCredito = simuladorCredito (credito,interes, plazo)
-           // adapter = context?.let { CustomAdapter(it, mCredito) }!!
-            //binding.recyclerView.adapter = adapter
+            simuladorCredito(credito, interes, plazo)
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(requireView().applicationWindowToken, 0)
         }
         return binding.root
 
@@ -58,23 +62,30 @@ class SimuladorFragmentUI : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
 
+
+
+
     private fun simuladorCredito(credito: Double, interes: Double, plazo: Int): ArrayList<objSimuladorCredito> {
+        val interesConversion = interes/100.00
         val objCuotaNumero = objSimuladorCredito(0,0.0,0.0,credito,0.0)
         matrizCredito.add(0,objCuotaNumero)
-        for (i in 1 .. plazo) {
+        cuota = Math.round(credito*(((interesConversion*(Math.pow((1.0+interesConversion),plazo.toDouble()))))/
+                (Math.pow((1.0+interesConversion),plazo.toDouble())-1.0))*100.0).toDouble()/100.0
+        for (i in 1 .. plazo+1) {
             coutaNumero++
-            cuota = ((credito*(interes*Math.pow((1.0+interes),plazo.toDouble())))/(Math.pow((1.0+interes),plazo.toDouble())-1.0))
-            intereses  = matrizCredito.get(i-1).saldo
-            abonoCapital = cuota-interes
+            intereses  = Math.round(((matrizCredito.get(i-1).saldo)*interesConversion)*100.0).toDouble()/100.0
+            abonoCapital = Math.round((cuota-intereses)*100.0).toDouble()/100.0
             saldo = matrizCredito.get(i-1).saldo - abonoCapital
             matrizCredito.add(i,objSimuladorCredito(coutaNumero, abonoCapital, intereses, saldo, cuota))
+            Log.e("credito",matrizCredito[i].toString())
         }
+
         return matrizCredito
     }
 
