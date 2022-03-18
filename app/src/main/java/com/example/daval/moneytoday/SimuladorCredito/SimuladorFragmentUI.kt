@@ -1,11 +1,9 @@
-package com.example.daval.moneytoday.Simulador
+package com.example.daval.moneytoday.SimuladorCredito
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,11 +26,6 @@ class SimuladorFragmentUI : Fragment() {
     private var saldo:Double = 0.0
     private var matrizCredito: ArrayList<objSimuladorCredito> = ArrayList()
 
-
-    fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,27 +52,23 @@ class SimuladorFragmentUI : Fragment() {
             binding.simCreditResPlazo.text = plazo.toString()
             binding.simCreditResTasaInt.text = interes.toString()
             for (i in 1 .. plazo + 1) {
-                Log.e("credito", resultadosSimulacion[i].instereses.toString())
-                interesesSuma += 0 + resultadosSimulacion[i].instereses
+
+                interesesSuma += (0 + resultadosSimulacion[i].instereses)*100.0/100.0
 
             }
             binding.simCreditResIntTotal.text = interesesSuma.toString()
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireView().applicationWindowToken, 0)
         }
-
+        setHasOptionsMenu(true)
         return binding.root
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
     }
-
-
-
 
     private fun simuladorCredito(credito: Double, interes: Double, plazo: Int): ArrayList<objSimuladorCredito> {
         val interesConversion = interes/100.00

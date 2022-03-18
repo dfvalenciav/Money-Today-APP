@@ -20,4 +20,5 @@
     <string name="plazo">Plazo:</string>
     <string name="intereses_totales">Intereses totales:</string>
     <string name="dinero_a_prestar">Dinero a prestar:</string>
+    <string name="simInversiones">SIMULADOR INVERSIONES</string>
 </resources>

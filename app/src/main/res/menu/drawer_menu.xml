@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/drawSimulador"
+        android:icon="@drawable/ic_baseline_monetization_on_24"
+        android:title="@string/simCredito"
+        />
+
+    <item
+        android:id="@+id/drawInversiones"
+        android:icon="@drawable/ic_baseline_invest_type_24"
+        android:title="@string/simInversiones"
+        />
+
+</menu>

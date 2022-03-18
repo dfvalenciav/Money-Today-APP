@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homePage"
         android:name="com.example.daval.moneytoday.HomePage"
-        android:label="fragment_home_page"
+        android:label="Inicio"
         tools:layout="@layout/fragment_home_page" >
         <action
             android:id="@+id/action_homePage_to_gastPersonalesView"
@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homePage_to_simuladorFragmentUI"
             app:destination="@id/simuladorFragmentUI" />
+        <action
+            android:id="@+id/action_homePage_to_simuladorInverFragment"
+            app:destination="@id/simuladorInverFragment" />
     </fragment>
     <fragment
         android:id="@+id/gastPersonalesView"
@@ -40,10 +43,19 @@
     </fragment>
     <fragment
         android:id="@+id/simuladorFragmentUI"
-        android:name="com.example.daval.moneytoday.Simulador.SimuladorFragmentUI"
-        android:label="SimuladorFragmentUI" >
+        android:name="com.example.daval.moneytoday.SimuladorCredito.SimuladorFragmentUI"
+        android:label="Simulador Credito" >
         <action
             android:id="@+id/action_simuladorFragmentUI_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/simuladorInverFragment"
+        android:name="com.example.daval.moneytoday.SimuladorInver.SimuladorInverFragment"
+        android:label="Simulador Inversiones"
+        tools:layout="@layout/fragment_simulador_inversiones" >
+        <action
+            android:id="@+id/action_simuladorInverFragment_to_homePage"
             app:destination="@id/homePage" />
     </fragment>
 </navigation>
