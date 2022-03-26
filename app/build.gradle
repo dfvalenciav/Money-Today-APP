@@ -54,4 +54,10 @@ dependencies {
     //database Room
     implementation "androidx.room:room-ktx:$version_room"
 
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    //LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+
+
 }

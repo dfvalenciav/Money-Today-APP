@@ -7,6 +7,8 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.daval.moneytoday.Adapter.CustomAdapter
 import com.example.daval.moneytoday.R
 import com.example.daval.moneytoday.dataMoneyToday.objSimuladorCredito
@@ -25,6 +27,9 @@ class SimuladorFragmentUI : Fragment() {
     private var intereses: Double = 0.0
     private var saldo:Double = 0.0
     private var matrizCredito: ArrayList<objSimuladorCredito> = ArrayList()
+
+    private lateinit var viewModel: SimuladorViewModel
+    private lateinit var viewModelFactory: SimuladorViewModelFactory
 
 
     override fun onCreateView(
@@ -45,18 +50,24 @@ class SimuladorFragmentUI : Fragment() {
                 plazo = Strplazo.toInt()
 
             }
-            var resultadosSimulacion = simuladorCredito(credito, interes, plazo)
-            var interesesSuma = 0.0
-            binding.simCreditResCuota.text = resultadosSimulacion[1].valCouta.toString()
-            binding.simCreditResMonto.text = credito.toString()
-            binding.simCreditResPlazo.text = plazo.toString()
-            binding.simCreditResTasaInt.text = interes.toString()
-            for (i in 1 .. plazo + 1) {
+            viewModelFactory = SimuladorViewModelFactory(credito,interes, plazo)
+            viewModel = ViewModelProvider(this, viewModelFactory).get(SimuladorViewModel::class.java)
+            viewModel.credito.observe(viewLifecycleOwner, Observer { newCredito ->
+                binding.simCreditResMonto.text = newCredito.toString()
+            })
+            viewModel.interes.observe(viewLifecycleOwner, Observer { newInteres ->
+                binding.simCreditResTasaInt.text = newInteres.toString()
+            })
+            viewModel.plazo.observe(viewLifecycleOwner, Observer { newPlazo ->
+                binding.simCreditResPlazo.text = newPlazo.toString()
+            })
+            viewModel.cuota.observe(viewLifecycleOwner, Observer { newCuota ->
+                binding.simCreditResCuota.text = newCuota.toString()
+            })
+            viewModel.intereses.observe(viewLifecycleOwner, Observer { newInteresesTot ->
+                binding.simCreditResIntTotal.text = newInteresesTot.toString()
+            })
 
-                interesesSuma += (0 + resultadosSimulacion[i].instereses)*100.0/100.0
-
-            }
-            binding.simCreditResIntTotal.text = interesesSuma.toString()
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireView().applicationWindowToken, 0)
         }
@@ -69,24 +80,4 @@ class SimuladorFragmentUI : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
     }
-
-    private fun simuladorCredito(credito: Double, interes: Double, plazo: Int): ArrayList<objSimuladorCredito> {
-        val interesConversion = interes/100.00
-        val objCuotaNumero = objSimuladorCredito(0,0.0,0.0,credito,0.0)
-        matrizCredito.add(0,objCuotaNumero)
-
-        cuota = Math.round(credito*(((interesConversion*(Math.pow((1.0+interesConversion),plazo.toDouble()))))/
-                (Math.pow((1.0+interesConversion),plazo.toDouble())-1.0))*100.0).toDouble()/100.0
-        for (i in 1 .. plazo+1) {
-            coutaNumero++
-            intereses  =  Math.round(((matrizCredito.get(i-1).saldo)*interesConversion)*100.0).toDouble()/100.0
-            abonoCapital = Math.round((cuota-intereses)*100.0).toDouble()/100.0
-            saldo = matrizCredito.get(i-1).saldo - abonoCapital
-            matrizCredito.add(i,objSimuladorCredito(coutaNumero, abonoCapital, intereses, saldo, cuota))
-            Log.e("credito",matrizCredito[i].toString())
-        }
-        return this.matrizCredito
-    }
-
-
 }
