@@ -7,7 +7,7 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        applicationId "com.example.daval.moneytoday"
+        applicationId "com.davalIndustries.daval.moneytoday"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1

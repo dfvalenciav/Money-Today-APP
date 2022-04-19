@@ -7,12 +7,9 @@
 
     <fragment
         android:id="@+id/homePage"
-        android:name="com.example.daval.moneytoday.HomePage"
+        android:name="com.davalIndustries.daval.moneytoday.HomePage"
         android:label="Inicio"
         tools:layout="@layout/fragment_home_page" >
-        <action
-            android:id="@+id/action_homePage_to_gastPersonalesView"
-            app:destination="@id/gastPersonalesView" />
         <action
             android:id="@+id/action_homePage_to_fragment_creditos"
             app:destination="@id/fragment_creditos" />
@@ -24,17 +21,8 @@
             app:destination="@id/simuladorInverFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gastPersonalesView"
-        android:name="com.example.daval.moneytoday.gastosPersonales.gastPersonalesView"
-        android:label="fragment_gast_personales_view"
-        tools:layout="@layout/fragment_gast_personales_view" >
-        <action
-            android:id="@+id/action_gastPersonalesView_to_homePage"
-            app:destination="@id/homePage" />
-    </fragment>
-    <fragment
         android:id="@+id/fragment_creditos"
-        android:name="com.example.daval.moneytoday.creditos.fragment_creditos"
+        android:name="com.davalIndustries.daval.moneytoday.creditos.fragment_creditos"
         android:label="fragment_creditos"
         tools:layout="@layout/fragment_creditos" >
         <action
@@ -43,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/simuladorFragmentUI"
-        android:name="com.example.daval.moneytoday.SimuladorCredito.SimuladorFragmentUI"
+        android:name="com.davalIndustries.daval.moneytoday.SimuladorCredito.SimuladorFragmentUI"
         android:label="Simulador Credito" >
         <action
             android:id="@+id/action_simuladorFragmentUI_to_homePage"
@@ -51,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/simuladorInverFragment"
-        android:name="com.example.daval.moneytoday.SimuladorInver.SimuladorInverFragment"
+        android:name="com.davalIndustries.daval.moneytoday.SimuladorInver.SimuladorInverFragment"
         android:label="Simulador Inversiones"
         tools:layout="@layout/fragment_simulador_inversiones" >
         <action

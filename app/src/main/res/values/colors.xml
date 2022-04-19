@@ -7,4 +7,6 @@
     <color name="secondaryVariant">#ffffff</color>
     <color name="onSecondary">#aeaeae</color>
     <color name="onPrimary">#ffffff</color>
+    <color name="colorRed">#F44336</color>
+    <color name="colorInversiones">#009688</color>
 </resources>
